@@ -9,6 +9,7 @@ class TrainConfig:
     )
     dataset_handle: str = "parve05/customer-review-dataset"
     dataset_file: str = "redmi6.csv"
+    model_dir: str = "models"
 
     test_size: float = 0.2
     random_state: int = 42

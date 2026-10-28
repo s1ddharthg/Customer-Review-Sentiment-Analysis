@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -28,6 +29,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=config.test_s
 
 model = DecisionTreeClassifier(random_state = config.random_state)
 model.fit(X_train,y_train)
+
+os.makedirs(config.model_dir, exist_ok=True)
+joblib.dump(model, os.path.join(config.model_dir, "sentiment_model.pkl"))
+joblib.dump(vectorizer, os.path.join(config.model_dir, "tfidf_vectorizer.pkl"))
 
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
