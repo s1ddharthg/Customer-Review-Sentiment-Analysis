@@ -1,12 +1,11 @@
 from dataclasses import dataclass
 import os
 
-
 @dataclass
 class TrainConfig:
     dataset_path: str = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
-        "dataset",
+        "../dataset",
     )
     dataset_handle: str = "parve05/customer-review-dataset"
     dataset_file: str = "redmi6.csv"

@@ -11,16 +11,18 @@ def preprocess_dataset(df):
     df = df.dropna()
 
     # Convert text to lowercase
-    df[1] = df[1].astype(str).str.lower()
+    df["Comments"] = df["Comments"].astype(str).str.lower()
 
     # Remove punctuation and special characters
-    df[1] = df[1].str.replace(r"[^\w\s]", "", regex=True)
+    df["Comments"] = df["Comments"].str.replace(r"[^\w\s]", "", regex=True)
 
-    df[2] = df[2].astype(str).str.extract(r"(\d+\.?\d*)").astype(float)
+    df["Rating"] = df["Rating"].astype(str).str.extract(r"(\d+\.?\d*)").astype(float)
 
     # Remove stopwords
-    df[5] = df[5].astype(str).apply(lambda x: " ".join(word for word in x.split() if word not in stop_words))
+    df["Comments"] = df["Comments"].astype(str).apply(
+        lambda x: " ".join(word for word in x.split() if word not in stop_words)
+    )
 
-    df["sentiment"] = df[2].apply(lambda x: 1 if x >= 4 else 0)
+    df["sentiment"] = df["Rating"].apply(lambda x: 1 if x >= 4 else 0)
 
     return df

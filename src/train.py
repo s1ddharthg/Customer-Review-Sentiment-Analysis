@@ -1,14 +1,14 @@
 import os
 import pandas as pd
 
-from .preprocessor import preprocess_dataset
-
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
-from src.download import download_dataset
-from src.config import TrainConfig
+
+from .preprocessor import preprocess_dataset
+from .download import download_dataset
+from .config import TrainConfig
 
 config = TrainConfig()
 dataset_path = download_dataset()

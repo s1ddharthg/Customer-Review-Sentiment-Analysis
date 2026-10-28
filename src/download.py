@@ -1,9 +1,6 @@
 import os
-
 import kagglehub
-
-from src.config import TrainConfig
-
+from .config import TrainConfig
 
 def download_dataset() -> str:
     config = TrainConfig()
