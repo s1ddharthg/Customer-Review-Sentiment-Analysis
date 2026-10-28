@@ -1,24 +1,28 @@
-from pathlib import Path
+import os
 
 import kagglehub
 
 from config import TrainConfig
 
 
-def download_dataset() -> Path:
-    dataset_path = TrainConfig.dataset_path
-    if dataset_path.is_dir() and any(dataset_path.iterdir()):
-        print("Dataset already exists at:", dataset_path)
+def download_dataset() -> str:
+    config = TrainConfig()
+    dataset_path = config.dataset_path
+
+    dataset_file = os.path.join(dataset_path, config.dataset_file)
+    if os.path.isfile(dataset_file):
+        print("Dataset already exists at:", dataset_file)
         return dataset_path
 
-    dataset_path.parent.mkdir(parents=True, exist_ok=True)
     print("Dataset not found. Downloading...")
+    os.makedirs(dataset_path, exist_ok=True)
+
     downloaded_path = kagglehub.dataset_download(
-        "datafiniti/consumer-reviews-of-amazon-products",
-        output_dir=str(dataset_path),
+        config.dataset_handle,
+        output_dir=dataset_path,
     )
     print("Dataset downloaded to:", downloaded_path)
-    return Path(downloaded_path)
+    return dataset_path
 
 
 if __name__ == "__main__":
