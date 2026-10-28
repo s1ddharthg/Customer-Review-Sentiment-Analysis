@@ -1,11 +1,12 @@
 import nltk
+from nltk.corpus import stopwords
+import pandas as pd
 
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 
-df = pd.read_csv(dataset_file, encoding="latin-1", header=None)
-
 def preprocess_dataset(df):
+
     # Remove rows with missing values
     df = df.dropna()
 

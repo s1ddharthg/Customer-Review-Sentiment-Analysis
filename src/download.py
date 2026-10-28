@@ -2,7 +2,7 @@ import os
 
 import kagglehub
 
-from config import TrainConfig
+from src.config import TrainConfig
 
 
 def download_dataset() -> str:

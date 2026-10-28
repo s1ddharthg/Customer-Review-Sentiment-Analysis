@@ -13,7 +13,7 @@ class TrainConfig:
 
     test_size: float = 0.2
     random_state: int = 42
-    max_features: int = 1000
+    max_features: int = 5000
 
     criterion: str = "gini"
     max_depth: int | None = None
