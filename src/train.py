@@ -20,14 +20,14 @@ if not os.path.isfile(dataset_file):
 df = pd.read_csv(dataset_file, encoding="latin-1")
 df_cleaned = preprocess_dataset(df)
 
-vectorizer = TfidfVectorizer(config.max_features)
-X = vectorizer.fit_transform(df_cleaned['review'])
+vectorizer = TfidfVectorizer(max_features = config.max_features)
+X = vectorizer.fit_transform(df_cleaned['Review Title'])
 y = df_cleaned['sentiment']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, config.test_size, config.random_state)
+X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=config.test_size, random_state=config.random_state)
 
-model = DecisionTreeClassifier(config.random_state)
-model.train(X_train,y_train)
+model = DecisionTreeClassifier(random_state = config.random_state)
+model.fit(X_train,y_train)
 
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
